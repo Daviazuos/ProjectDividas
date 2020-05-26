@@ -11,12 +11,13 @@ class AddValuesCredCard(Resource):
         parser.add_argument('QuantidadeDeParcelas', type=int)
         parser.add_argument('TipoDeDivida', type=str)
         parser.add_argument('DataCompra', type=str)
+        parser.add_argument('Descricao', type=str)
 
         # adicionando valores ao cartão de crédito
 
         args = parser.parse_args()
-        DebtsValues, uniqueId = Models.AddValuesCredCardModels(args)
-        AddValues = DbServices.SendCredCard(DebtsValues[uniqueId])
+        DebtsValues, uniqueId = Models.AddValuesCredCard(args)
+        AddValues = DbServices.SendValuesCredCard(DebtsValues)
         if AddValues:
             return uniqueId,200
         else:
@@ -28,5 +29,6 @@ class AddValuesCredCard(Resource):
             "Valor": 150.00,
             "QuantidadeDeParcelas": 10,
             "TipoDeDivida": "Parcelada",
-            "DataCompra": "2020-05-15"
+            "DataCompra": "2020-05-15",
+            "Descricao": "Livros"
         }

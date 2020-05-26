@@ -26,28 +26,43 @@ def AddDebtsValuesModels(args):
     return AddSimpleValues, UniqueId
 
 def AddCredCardModels(args):
-    UniqueId = str(uuid.uuid1())
+    UniqueIdCred = str(uuid.uuid1())
 
     # Aqui faremos um dict of dict (a chave será sempre o UniqueId)
     # com os dados sendo validados um a um e colocando o status de ativo
 
-    AddCredCard = {UniqueId: {
-        'CardId': UniqueId,
+    AddCredCard = {
+        'CardId': UniqueIdCred,
         'CardName': args['CardName'],
         'Vencimento': args['Vencimento'],
         'Fechamento': args['Fechamento'],
-        'Valor': 0.00,
         'CardStatus': 'Active'
-    }}
+
+    }
 
     # Manda pra validação!
 
-    return AddCredCard, UniqueId
+    return AddCredCard, UniqueIdCred
+
+def AddValuesCredCard(args):
+    UniqueIdValue = str(uuid.uuid1())
+
+    args = AddValuesCredCardModels(args)
+
+    AddValue = {
+            "Id": UniqueIdValue,
+            "CardName": args['CardName'],
+            "NumeroParcelas": args['QuantidadeDeParcelas'],
+            "Valor": args['Valor'],
+            "Vencimento": args['VencimentoAjustado'],
+            "Status": "Active",
+            "TipoDeDivida": args["TipoDeDivida"],
+            "Descricao": args['Descricao']
+    }
+
+    return AddValue, UniqueIdValue
 
 def AddValuesCredCardModels(args):
     ValuesCardDb = DbServices.GetValuesByCardName(args['CardName'])
-    SumValues = CredCardServices.CredCardLogic(args, ValuesCardDb)
-    return SumValues, ValuesCardDb
-
-
-
+    AdjustFechamento = CredCardServices.CredCardLogic(args, ValuesCardDb)
+    return AdjustFechamento

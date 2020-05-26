@@ -1,4 +1,4 @@
-CREATE TABLE CadDiv(
+CREATE TABLE cadDiv(
 	Id serial PRIMARY KEY,
 	name VARCHAR (50),
 	valor FLOAT,

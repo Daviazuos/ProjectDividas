@@ -3,6 +3,17 @@ from Services import ConnectionServices
 
 connection = ConnectionServices.conn().ConnPostgres()
 
+def CreateTables():
+    cur = connection.cursor
+    con = connection.conn
+    #createcardcred = open(os.path.join("Queries","CreateCadCred.sql")).read()
+    #createcaddiv = open(os.path.join("Queries","CreateCadDiv.sql")).read()
+    createcardcredvalues = open(os.path.join("Queries","CreateCadValuesCred.sql")).read()
+    #cur.execute(createcardcred)
+    #cur.execute(createcaddiv)
+    cur.execute(createcardcredvalues)
+    con.commit()
+
 def SendSimpleDebts(values):
     msg = True
     cur = connection.cursor
@@ -24,6 +35,28 @@ def SendSimpleDebts(values):
         msg = False
     return msg
 
+def SendValuesCredCard(values):
+    msg = True
+    cur = connection.cursor
+    con = connection.conn
+    AddValues = open(os.path.join("Queries","AddValuesCredCard.sql")).read()
+    try:
+        cur.execute(AddValues,
+                    (
+                      values['Id'],
+                      values['CardName'],
+                      values['NumeroParcelas'],
+                      values['Valor'],
+                      values['Vencimento'],
+                      values['Status'],
+                      values['TipoDeDivida'],
+                      values['Descricao']
+                    ))
+        con.commit()
+    except Exception as e:
+        msg = False
+    return msg
+
 def SendCredCard(values):
     msg = True
     cur = connection.cursor
@@ -36,7 +69,6 @@ def SendCredCard(values):
                       values['CardName'],
                       values['Vencimento'],
                       values['Fechamento'],
-                      values['Valor'],
                       values['CardStatus']
                     ))
         con.commit()
