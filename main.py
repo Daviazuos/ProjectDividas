@@ -2,9 +2,11 @@ from flask import Flask
 from flask_restful import Api
 from Controllers import AddSimpleControlers, AddCredCardControlers, AddValuesCardControlers, HomePage
 from Services import DbServices
+from flask_cors import CORS
 
 app = Flask(__name__)
 api = Api(app)
+CORS(app)
 
 DbServices.CreateTables()
 
