@@ -1,4 +1,4 @@
-CREATE TABLE cadcardvalues(
+CREATE TABLE IF NOT EXISTS cadcardvalues(
 	Id VARCHAR (50),
 	name VARCHAR (50),
 	valor FLOAT,
