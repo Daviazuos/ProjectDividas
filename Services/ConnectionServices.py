@@ -14,9 +14,9 @@ class conn:
         DadosDb = configparser.ConfigParser()
         DadosDb.read('config.ini')
 
-        host = DadosDb['POSTGRES DEV']['host']
-        db = DadosDb['POSTGRES DEV']['db']
-        User = DadosDb['POSTGRES DEV']['User']
-        port = DadosDb['POSTGRES DEV']['port']
-        password = DadosDb['POSTGRES DEV']['password']
+        host = DadosDb['HEROKU POSTGRES']['host']
+        db = DadosDb['HEROKU POSTGRES']['db']
+        User = DadosDb['HEROKU POSTGRES']['User']
+        port = DadosDb['HEROKU POSTGRES']['port']
+        password = DadosDb['HEROKU POSTGRES']['password']
         return host, User, password, port, db

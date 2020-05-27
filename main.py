@@ -6,7 +6,7 @@ from Services import DbServices
 app = Flask(__name__)
 api = Api(app)
 
-#DbServices.CreateTables()
+DbServices.CreateTables()
 
 api.add_resource(AddSimpleControlers.AddSimpleDebts, '/AddSimple')
 api.add_resource(AddCredCardControlers.AddCredCard, '/AddCard')

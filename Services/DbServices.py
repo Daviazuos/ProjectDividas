@@ -6,11 +6,11 @@ connection = ConnectionServices.conn().ConnPostgres()
 def CreateTables():
     cur = connection.cursor
     con = connection.conn
-    #createcardcred = open(os.path.join("Queries","CreateCadCred.sql")).read()
-    #createcaddiv = open(os.path.join("Queries","CreateCadDiv.sql")).read()
+    createcardcred = open(os.path.join("Queries","CreateCadCred.sql")).read()
+    createcaddiv = open(os.path.join("Queries","CreateCadDiv.sql")).read()
     createcardcredvalues = open(os.path.join("Queries","CreateCadValuesCred.sql")).read()
-    #cur.execute(createcardcred)
-    #cur.execute(createcaddiv)
+    cur.execute(createcardcred)
+    cur.execute(createcaddiv)
     cur.execute(createcardcredvalues)
     con.commit()
 
