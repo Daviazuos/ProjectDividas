@@ -83,6 +83,13 @@ def GetValuesByCardName(CardName):
     CardId = QueryToDict(cur.fetchall())
     return CardId
 
+def GetValuesById(id):
+    cur = connection.cursor
+    AddValues = open(os.path.join("Queries","GetSimpleById.sql")).read()
+    cur.execute(AddValues.format("'"+id+"'"))
+    CardId = SimpleQueryToDict(cur.fetchall())
+    return CardId
+
 def QueryToDict(query):
     values = query[0]
     DictQuery = {
@@ -92,5 +99,18 @@ def QueryToDict(query):
         "Fechamento": values[3],
         "Valor": values[4],
         "Status": values[5]
+    }
+    return DictQuery
+
+def SimpleQueryToDict(query):
+    values = query[0]
+    DictQuery = {
+        "Id": values[0],
+        "name": values[1],
+        "valor": values[2],
+        "numeroparcelas": values[3],
+        "vencimento": str(values[4]),
+        "TipoDeDivida": values[5],
+        "Status": values[6]
     }
     return DictQuery

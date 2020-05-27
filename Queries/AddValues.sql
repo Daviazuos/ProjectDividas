@@ -3,6 +3,6 @@ INSERT INTO caddiv ("id",
                   "numeroparcelas",
                   "valor",
                   "vencimento",
-                  "Status",
-                  "TipoDeDivida")
+                  "status",
+                  "tipodedivida")
 VALUES(%s, %s, %s, %s, %s, %s, %s)

@@ -9,7 +9,7 @@ api = Api(app)
 DbServices.CreateTables()
 
 api.add_resource(HomePage.HomePage, '/')
-api.add_resource(AddSimpleControlers.AddSimpleDebts, '/AddSimple')
+api.add_resource(AddSimpleControlers.AddSimpleDebts, '/AddSimple', '/AddSimple/<id>')
 api.add_resource(AddCredCardControlers.AddCredCard, '/AddCard')
 api.add_resource(AddValuesCardControlers.AddValuesCredCard, '/AddValuesCard')
 

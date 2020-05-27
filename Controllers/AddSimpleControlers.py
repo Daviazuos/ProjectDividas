@@ -22,11 +22,5 @@ class AddSimpleDebts(Resource):
         else:
             return 400
 
-    def get(self):
-        return {
-            "Name": "Davi",
-            "Valor": 150.00,
-            "Vencimento": "2020-05-15",
-            "QuantidadeParcelas": 10,
-            "TipoDeDivida": "Parcelada"
-        }
+    def get(self, id):
+        return DbServices.GetValuesById(id)
