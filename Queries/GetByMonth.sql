@@ -1,0 +1,1 @@
+SELECT * FROM caddiv WHERE EXTRACT(MONTH FROM vencimento) = {} and EXTRACT(YEAR FROM vencimento) = {}

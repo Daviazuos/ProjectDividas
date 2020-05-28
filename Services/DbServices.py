@@ -90,6 +90,13 @@ def GetValuesById(id):
     CardId = SimpleQueryToDict(cur.fetchall())
     return CardId
 
+def GetValuesByMonth(Month, Year):
+    cur = connection.cursor
+    AddValues = open(os.path.join("Queries","GetByMonth.sql")).read()
+    cur.execute(AddValues.format("'"+Month+"'", "'"+Year+"'"))
+    values = SimpleQueryToDict(cur.fetchall())
+    return values
+
 def QueryToDict(query):
     values = query[0]
     DictQuery = {
@@ -103,14 +110,16 @@ def QueryToDict(query):
     return DictQuery
 
 def SimpleQueryToDict(query):
-    values = query[0]
-    DictQuery = {
-        "Id": values[0],
-        "name": values[1],
-        "valor": values[2],
-        "numeroparcelas": values[3],
-        "vencimento": str(values[4]),
-        "TipoDeDivida": values[5],
-        "Status": values[6]
-    }
-    return DictQuery
+    Array = []
+    for values in query:
+        DictQuery = {
+            "Id": values[0],
+            "name": values[1],
+            "valor": values[2],
+            "numeroparcelas": values[3],
+            "vencimento": str(values[4]),
+            "TipoDeDivida": values[5],
+            "Status": values[6]
+        }
+        Array.append(DictQuery)
+    return Array
