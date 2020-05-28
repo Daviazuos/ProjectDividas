@@ -15,8 +15,11 @@ class AddSimpleDebts(Resource):
         # adicionando dívidas simples
 
         args = parser.parse_args()
-        DebtsValues, uniqueId = Models.AddDebtsValuesModels(args)
-        AddValues = DbServices.SendSimpleDebts(DebtsValues[uniqueId])
+        DebtsValues, uniqueId, result = Models.AddDebtsValuesModels(args)
+        if result:
+            AddValues = DbServices.SendSimpleDebts(DebtsValues)
+        else:
+            return DebtsValues, 400
         if AddValues:
             return uniqueId,200
         else:

@@ -11,7 +11,7 @@ def AddDebtsValuesModels(args):
     if args['TipoDeDivida'] == "fixa":
         args['QuantidadeParcelas'] = 0
 
-    AddSimpleValues = {UniqueId: {
+    AddSimpleValues = {
         'Id': UniqueId,
         'Name': args['Name'],
         'Valor': args['Valor'],
@@ -19,11 +19,13 @@ def AddDebtsValuesModels(args):
         'TipoDeDivida': args['TipoDeDivida'],
         'NumeroParcelas': args['QuantidadeParcelas'],
         'Status': 'Active'
-    }}
+    }
 
     # Manda pra validação!
 
-    return AddSimpleValues, UniqueId
+    AddSimpleValues, result = Validators.AddDebtsValid(AddSimpleValues)
+
+    return AddSimpleValues, UniqueId, result
 
 def AddCredCardModels(args):
     UniqueIdCred = str(uuid.uuid1())
