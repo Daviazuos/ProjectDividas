@@ -1,12 +1,5 @@
 import datetime
 
-
-# parser.add_argument('CardName', type=str)
-# parser.add_argument('Valor', type=float)
-# parser.add_argument('QuantidadeDeParcelas', type=int)
-# parser.add_argument('TipoDeDivida', type=str)
-# parser.add_argument('DataCompra', type=str)
-
 def CredCardLogic(args, valuesdb):
     DiaMesCompra = args['DataCompra'][-5:]
     anoAtual = datetime.datetime.now().year
@@ -17,7 +10,6 @@ def CredCardLogic(args, valuesdb):
             dataAjustada = "{}-{}-{}".format(anoAtual,mesfechamento.split('-')[0],mesfechamento.split('-')[1])
             args['VencimentoAjustado'] = datetime.datetime.strptime(dataAjustada, "%Y-%m-%d")
             return args
-
 
 def GetDataFechamento():
     meses = [

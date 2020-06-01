@@ -3,5 +3,4 @@ CREATE TABLE IF NOT EXISTS cadcard(
 	cardname VARCHAR (50),
 	vencimento int,
 	fechamento int,
-	valor FLOAT,
-	Status VARCHAR (50));
+	status VARCHAR (50));
