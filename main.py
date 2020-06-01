@@ -10,7 +10,8 @@ CORS(app)
 
 DbServices.CreateTables()
 
-api.add_resource(HomePage.HomePage, '/')
+# post
+
 api.add_resource(AddSimpleControlers.AddSimpleDebts, '/AddSimple')
 api.add_resource(AddCredCardControlers.AddCredCard, '/AddCard')
 api.add_resource(AddValuesCardControlers.AddValuesCredCard, '/AddValuesCard')
@@ -18,6 +19,7 @@ api.add_resource(AddValuesCardControlers.AddValuesCredCard, '/AddValuesCard')
 # get
 
 api.add_resource(GetByMonthControlers.GetDebtsByMonth, '/GetValuesByMOnth/<Month>/<Year>')
+api.add_resource(GetByMonthControlers.GetDebtsByCurrentMonth, '/')
 
 if __name__ == '__main__':
     app.run(debug=True)

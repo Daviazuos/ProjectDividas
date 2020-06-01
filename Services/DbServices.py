@@ -1,5 +1,6 @@
 import os
 from Services import ConnectionServices
+import datetime
 
 connection = ConnectionServices.conn().ConnPostgres()
 
@@ -96,6 +97,17 @@ def GetValuesByMonth(Month, Year):
     cur.execute(AddValues.format("'"+Month+"'", "'"+Year+"'"))
     values = SimpleQueryToDict(cur.fetchall())
     return values
+
+def GetValuesByCurrentMonth():
+    CurrentDate = datetime.datetime.now()
+    Month = str(CurrentDate.month)
+    Year = str(CurrentDate.year)
+    cur = connection.cursor
+    GetValues = open(os.path.join("Queries", "GetByMonth.sql")).read()
+    cur.execute(GetValues.format("'" + Month + "'", "'" + Year + "'"))
+    values = SimpleQueryToDict(cur.fetchall())
+    return values
+
 
 def QueryToDict(query):
     values = query[0]
