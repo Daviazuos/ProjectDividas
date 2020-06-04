@@ -1,6 +1,7 @@
 import os
 from Services import ConnectionServices
 import datetime
+from Commons import QueryToDict
 
 connection = ConnectionServices.conn().ConnPostgres()
 
@@ -70,7 +71,7 @@ def SendCredCard(values):
                       values['CardName'],
                       values['Vencimento'],
                       values['Fechamento'],
-                      values['CardStatus']
+                      values['Status']
                     ))
         con.commit()
     except Exception as e:
@@ -81,21 +82,28 @@ def GetValuesByCardName(CardName):
     cur = connection.cursor
     AddValues = open(os.path.join("Queries","GetIdCard.sql")).read()
     cur.execute(AddValues.format("'"+CardName+"'"))
-    CardId = QueryToDict(cur.fetchall())
+    CardId = QueryToDict.QueryToDict(cur.fetchall())
     return CardId
 
 def GetValuesById(id):
     cur = connection.cursor
     AddValues = open(os.path.join("Queries","GetSimpleById.sql")).read()
     cur.execute(AddValues.format("'"+id+"'"))
-    CardId = SimpleQueryToDict(cur.fetchall())
+    CardId = QueryToDict.SimpleQueryToDict(cur.fetchall())
+    return CardId
+
+def GetCards():
+    cur = connection.cursor
+    GetValues = open(os.path.join("Queries", "GetCards.sql")).read()
+    cur.execute(GetValues)
+    CardId = QueryToDict.CardsQueryToDict(cur.fetchall())
     return CardId
 
 def GetValuesByMonth(Month, Year):
     cur = connection.cursor
     AddValues = open(os.path.join("Queries","GetByMonth.sql")).read()
     cur.execute(AddValues.format("'"+Month+"'", "'"+Year+"'"))
-    values = SimpleQueryToDict(cur.fetchall())
+    values = QueryToDict.SimpleQueryToDict(cur.fetchall())
     return values
 
 def GetValuesByCurrentMonth():
@@ -103,35 +111,14 @@ def GetValuesByCurrentMonth():
     Month = str(CurrentDate.month)
     Year = str(CurrentDate.year)
     cur = connection.cursor
-    GetValues = open(os.path.join("Queries", "GetByMonth.sql")).read()
-    cur.execute(GetValues.format("'" + Month + "'", "'" + Year + "'"))
-    values = SimpleQueryToDict(cur.fetchall())
-    return values
 
+    GetDebtValues = open(os.path.join("Queries", "GetByMonth.sql")).read()
+    GetCardDebtValues = open(os.path.join("Queries", "GetCardDebtsByMonth.sql")).read()
 
-def QueryToDict(query):
-    values = query[0]
-    DictQuery = {
-        "UniqueId": values[0],
-        "CardName": values[1],
-        "Vencimento": values[2],
-        "Fechamento": values[3],
-        "Valor": values[4],
-        "Status": values[5]
-    }
-    return DictQuery
+    cur.execute(GetDebtValues.format("'" + Month + "'", "'" + Year + "'"))
+    Debtsvalues = QueryToDict.SimpleQueryToDict(cur.fetchall())
 
-def SimpleQueryToDict(query):
-    Array = []
-    for values in query:
-        DictQuery = {
-            "Id": values[0],
-            "name": values[1],
-            "valor": values[2],
-            "numeroparcelas": values[3],
-            "vencimento": str(values[4]),
-            "TipoDeDivida": values[5],
-            "Status": values[6]
-        }
-        Array.append(DictQuery)
-    return Array
+    cur.execute(GetCardDebtValues.format("'" + Month + "'", "'" + Year + "'"))
+    CardDebtsvalues = QueryToDict.SimpleQueryToDict(cur.fetchall())
+
+    return Debtsvalues, CardDebtsvalues

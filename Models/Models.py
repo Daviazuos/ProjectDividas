@@ -38,8 +38,7 @@ def AddCredCardModels(args):
         'CardName': args['CardName'],
         'Vencimento': args['Vencimento'],
         'Fechamento': args['Fechamento'],
-        'CardStatus': 'Active'
-
+        'Status': 'Active'
     }
 
     # Manda pra validação!

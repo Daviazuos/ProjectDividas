@@ -1,6 +1,6 @@
 from flask import Flask
 from flask_restful import Api
-from Controllers import AddSimpleControlers, AddCredCardControlers, AddValuesCardControlers,GetByMonthControlers , HomePage
+from Controllers import AddSimpleControlers, AddCredCardControlers, AddValuesCardControlers,GetByMonthControlers , GetCardsControlers
 from Services import DbServices
 from flask_cors import CORS
 
@@ -18,8 +18,9 @@ api.add_resource(AddValuesCardControlers.AddValuesCredCard, '/AddValuesCard')
 
 # get
 
-api.add_resource(GetByMonthControlers.GetDebtsByMonth, '/GetValuesByMOnth/<Month>/<Year>')
 api.add_resource(GetByMonthControlers.GetDebtsByCurrentMonth, '/')
+api.add_resource(GetByMonthControlers.GetDebtsByMonth, '/GetValuesByMOnth/<Month>/<Year>')
+api.add_resource(GetCardsControlers.GetCards, '/GetCards')
 
 if __name__ == '__main__':
     app.run(debug=True)
