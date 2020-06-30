@@ -21,6 +21,7 @@ api.add_resource(AddValuesCardControlers.AddValuesCredCard, '/AddValuesCard')
 api.add_resource(GetByMonthControlers.GetDebtsByCurrentMonth, '/')
 api.add_resource(GetByMonthControlers.GetDebtsByMonth, '/GetValuesByMOnth/<Month>/<Year>')
 api.add_resource(GetCardsControlers.GetCards, '/GetCards')
+api.add_resource(GetCardsControlers.GetCardsNames, '/GetCardsNames')
 
 if __name__ == '__main__':
     app.run(debug=True)

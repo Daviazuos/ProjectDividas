@@ -99,6 +99,13 @@ def GetCards():
     CardId = QueryToDict.CardsQueryToDict(cur.fetchall())
     return CardId
 
+def GetCardsNames():
+    cur = connection.cursor
+    GetValues = open(os.path.join("Queries", "GetCardsNames.sql")).read()
+    cur.execute(GetValues)
+    CardNames = QueryToDict.CardsNamesQueryToDict(cur.fetchall())
+    return CardNames
+
 def GetValuesByMonth(Month, Year):
     cur = connection.cursor
     AddValues = open(os.path.join("Queries","GetByMonth.sql")).read()
