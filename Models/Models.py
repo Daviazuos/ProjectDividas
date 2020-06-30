@@ -8,7 +8,7 @@ def AddDebtsValuesModels(args):
 
     # Aqui faremos um dict of dict (a chave será sempre o UniqueId)
     # com os dados sendo validados um a um e colocando o status de ativo
-    if args['TipoDeDivida'] == "fixa":
+    if args['TipoDeDivida'] == "fixa" or args['TipoDeDivida'] == "simples":
         args['QuantidadeParcelas'] = 0
 
     AddSimpleValues = {

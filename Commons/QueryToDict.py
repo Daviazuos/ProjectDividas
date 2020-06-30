@@ -12,15 +12,17 @@ def QueryToDict(query):
     return DictQuery
 
 def CardsQueryToDict(query):
-    values = query[0]
-    DictQuery = {
-        "Cardid": values[0],
-        "Cardname": values[1],
-        "Vencimento": values[2],
-        "Fechamento": values[3],
-        "Status": values[4]
-    }
-    return DictQuery
+    Array = []
+    for values in query:
+        DictQuery = {
+            "Cardid": values[0],
+            "Cardname": values[1],
+            "Vencimento": values[2],
+            "Fechamento": values[3],
+            "Status": values[4]
+        }
+        Array.append(DictQuery)
+    return Array
 
 def SimpleQueryToDict(query):
     Array = []
