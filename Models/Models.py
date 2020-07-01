@@ -47,17 +47,19 @@ def AddCredCardModels(args):
 
 def AddValuesCredCard(args):
     UniqueIdValue = str(uuid.uuid1())
+    if args['TipoDeDividaCartao'] == "fixa" or args['TipoDeDividaCartao'] == "simples":
+        args['QuantidadeDeParcelasCartao'] = 0
 
     args = AddValuesCredCardModels(args)
 
     AddValue = {
             "Id": UniqueIdValue,
             "CardName": args['CardName'],
-            "NumeroParcelas": args['QuantidadeDeParcelas'],
+            "NumeroParcelas": args['QuantidadeDeParcelasCartao'],
             "Valor": args['Valor'],
             "Vencimento": args['VencimentoAjustado'],
             "Status": "Active",
-            "TipoDeDivida": args["TipoDeDivida"],
+            "TipoDeDivida": args["TipoDeDividaCartao"],
             "Descricao": args['Descricao']
     }
 
