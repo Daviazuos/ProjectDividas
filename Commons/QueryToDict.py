@@ -48,6 +48,15 @@ def SimpleQueryToDict(query):
         Array.append(DictQuery)
     return Array
 
+def SimpleSumQueryToDict(query):
+    Array = []
+    for values in query:
+        DictQuery = {
+            "Sum": values[0]
+        }
+        Array.append(DictQuery)
+    return Array
+
 def CardQueryToDict(query):
     Array = []
     for values in query:

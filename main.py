@@ -23,6 +23,7 @@ api.add_resource(GetByMonthControlers.GetCardDebtsByCurrentMonth, '/Card')
 api.add_resource(GetByMonthControlers.GetDebtsByMonth, '/GetValuesByMOnth/<Month>/<Year>')
 api.add_resource(GetCardsControlers.GetCards, '/GetCards')
 api.add_resource(GetCardsControlers.GetCardsNames, '/GetCardsNames')
+api.add_resource(GetCardsControlers.GetDebtsSum, '/GetDebtsSum/<Month>/<Year>')
 
 if __name__ == '__main__':
     app.run(debug=True)

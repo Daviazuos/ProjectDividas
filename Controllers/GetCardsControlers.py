@@ -8,3 +8,7 @@ class GetCards(Resource):
 class GetCardsNames(Resource):
     def get(self):
         return DbServices.GetCardsNames()
+
+class GetDebtsSum(Resource):
+    def get(self, Month,Year):
+        return DbServices.GetDebtsSum(Month, Year)
