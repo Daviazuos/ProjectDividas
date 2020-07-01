@@ -126,6 +126,6 @@ def GetValuesByCurrentMonth():
     Debtsvalues = QueryToDict.SimpleQueryToDict(cur.fetchall())
 
     cur.execute(GetCardDebtValues.format("'" + Month + "'", "'" + Year + "'"))
-    CardDebtsvalues = QueryToDict.SimpleQueryToDict(cur.fetchall())
+    CardDebtsvalues = QueryToDict.CardQueryToDict(cur.fetchall())
 
-    return Debtsvalues, CardDebtsvalues
+    return [Debtsvalues, CardDebtsvalues]
