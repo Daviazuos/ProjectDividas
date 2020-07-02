@@ -120,6 +120,13 @@ def GetDebtsSum(Month, Year):
     values = QueryToDict.SimpleSumQueryToDict(cur.fetchall())
     return values
 
+def GetCardsSum(Month, Year):
+    cur = connection.cursor
+    SumValues = open(os.path.join("Queries","GetSumCards.sql")).read()
+    cur.execute(SumValues.format("'"+Month+"'", "'"+Year+"'"))
+    values = QueryToDict.SimpleSumQueryToDict(cur.fetchall())
+    return values
+
 def GetValuesByCurrentMonth():
     CurrentDate = datetime.datetime.now()
     Month = str(CurrentDate.month)

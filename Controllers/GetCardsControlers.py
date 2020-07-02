@@ -12,3 +12,7 @@ class GetCardsNames(Resource):
 class GetDebtsSum(Resource):
     def get(self, Month,Year):
         return DbServices.GetDebtsSum(Month, Year)
+
+class GetCardsSum(Resource):
+    def get(self, Month,Year):
+        return DbServices.GetCardsSum(Month, Year)
