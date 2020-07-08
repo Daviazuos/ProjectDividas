@@ -4,7 +4,7 @@ select
 
 from caddiv
 
-where extract(month from vencimento) > '01' and extract(year from vencimento) = {}
+where iscardcred = 'false' and extract(month from vencimento) > '01' and extract(year from vencimento) = {}
 
 group by
 	extract(month from vencimento),
