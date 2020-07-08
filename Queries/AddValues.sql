@@ -4,5 +4,7 @@ INSERT INTO caddiv ("id",
                   "valor",
                   "vencimento",
                   "status",
-                  "tipodedivida")
-VALUES(%s, %s, %s, %s, %s, %s, %s)
+                  "tipodedivida",
+                  "descricao",
+                  "iscardcred")
+VALUES(%s, %s, %s, %s, %s, %s, %s, %s, %s)

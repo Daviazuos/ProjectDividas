@@ -20,13 +20,19 @@ api.add_resource(AddValuesCardControlers.AddValuesCredCard, '/AddValuesCard')
 
 api.add_resource(GetByMonthControlers.GetSimpleDebtsByCurrentMonth, '/Simple')
 api.add_resource(GetByMonthControlers.GetCardDebtsByCurrentMonth, '/Card')
+
 api.add_resource(GetByMonthControlers.GetDebtsByMonth, '/GetValuesByMOnth/<Month>/<Year>')
+
 api.add_resource(GetCardsControlers.GetCards, '/GetCards')
 api.add_resource(GetCardsControlers.GetCardsNames, '/GetCardsNames')
 
+api.add_resource(GetCardsControlers.GetAllSum, '/GetAllSum/<Year>')
 api.add_resource(GetCardsControlers.GetAllDebtsSum, '/GetAllDebtsSum/<Month>/<Year>')
 api.add_resource(GetCardsControlers.GetDebtsSum, '/GetDebtsSum/<Month>/<Year>')
 api.add_resource(GetCardsControlers.GetCardsSum, '/GetCardsSum/<Month>/<Year>')
+
+api.add_resource(GetCardsControlers.GetMonthDebtsSum, '/GetMonthDebtsSum/<Year>')
+api.add_resource(GetCardsControlers.GetMonthCardsSum, '/GetMonthCardsSum/<Year>')
 
 if __name__ == '__main__':
     app.run(debug=True)

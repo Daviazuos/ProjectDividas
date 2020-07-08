@@ -10,13 +10,11 @@ def CreateTables():
     con = connection.conn
     createcardcred = open(os.path.join("Queries","CreateCadCred.sql")).read()
     createcaddiv = open(os.path.join("Queries","CreateCadDiv.sql")).read()
-    createcardcredvalues = open(os.path.join("Queries","CreateCadValuesCred.sql")).read()
     cur.execute(createcardcred)
     cur.execute(createcaddiv)
-    cur.execute(createcardcredvalues)
     con.commit()
 
-def SendSimpleDebts(values):
+def SendDebtsValues(values):
     msg = True
     cur = connection.cursor
     con = connection.conn
@@ -30,29 +28,9 @@ def SendSimpleDebts(values):
                       values['Valor'],
                       values['Vencimento'],
                       values['Status'],
-                      values['TipoDeDivida']
-                    ))
-        con.commit()
-    except Exception as e:
-        msg = False
-    return msg
-
-def SendValuesCredCard(values):
-    msg = True
-    cur = connection.cursor
-    con = connection.conn
-    AddValues = open(os.path.join("Queries","AddValuesCredCard.sql")).read()
-    try:
-        cur.execute(AddValues,
-                    (
-                      values['Id'],
-                      values['CardName'],
-                      values['NumeroParcelas'],
-                      values['Valor'],
-                      values['Vencimento'],
-                      values['Status'],
                       values['TipoDeDivida'],
-                      values['Descricao']
+                      values['descricao'],
+                      values['iscardcred']
                     ))
         con.commit()
     except Exception as e:
@@ -85,13 +63,6 @@ def GetValuesByCardName(CardName):
     CardId = QueryToDict.QueryToDict(cur.fetchall())
     return CardId
 
-def GetValuesById(id):
-    cur = connection.cursor
-    AddValues = open(os.path.join("Queries","GetSimpleById.sql")).read()
-    cur.execute(AddValues.format("'"+id+"'"))
-    CardId = QueryToDict.SimpleQueryToDict(cur.fetchall())
-    return CardId
-
 def GetCards():
     cur = connection.cursor
     GetValues = open(os.path.join("Queries", "GetCards.sql")).read()
@@ -108,7 +79,7 @@ def GetCardsNames():
 
 def GetValuesByMonth(Month, Year):
     cur = connection.cursor
-    AddValues = open(os.path.join("Queries","GetByMonth.sql")).read()
+    AddValues = open(os.path.join("Queries","GetValuesByMonth.sql")).read()
     cur.execute(AddValues.format("'"+Month+"'", "'"+Year+"'"))
     values = QueryToDict.SimpleQueryToDict(cur.fetchall())
     return values
@@ -116,17 +87,22 @@ def GetValuesByMonth(Month, Year):
 def GetAllDebtsSum(Month, Year):
     cur = connection.cursor
     SumDebtsValues = open(os.path.join("Queries","GetSumDebts.sql")).read()
-    SumCardValues = open(os.path.join("Queries","GetSumCards.sql")).read()
 
     cur.execute(SumDebtsValues.format("'"+Month+"'", "'"+Year+"'"))
     DebtsValues = QueryToDict.SimpleSumQueryToDict(cur.fetchall())
 
-    cur.execute(SumCardValues.format("'" + Month + "'", "'" + Year + "'"))
-    CardsValues = QueryToDict.SimpleSumQueryToDict(cur.fetchall())
+    return [{"Sum": DebtsValues[0]['Sum']}]
 
-    values = [{"Sum": DebtsValues[0]['Sum'] + CardsValues[0]['Sum']}]
+def GetAllDebtsByMonth(year):
+    cur = connection.cursor
+    SumDebtsValues = open(os.path.join("Queries","GetAllDebtsSumByMonth.sql")).read()
 
-    return values
+    cur.execute(SumDebtsValues.format("'"+year+"'"))
+    DebtsValues = cur.fetchall()
+
+    AllValues = QueryToDict.SumValuesToDict(DebtsValues)
+
+    return AllValues
 
 def GetDebtsSum(Month, Year):
     cur = connection.cursor
@@ -148,13 +124,9 @@ def GetValuesByCurrentMonth():
     Year = str(CurrentDate.year)
     cur = connection.cursor
 
-    GetDebtValues = open(os.path.join("Queries", "GetByMonth.sql")).read()
-    GetCardDebtValues = open(os.path.join("Queries", "GetCardDebtsByMonth.sql")).read()
+    GetDebtValues = open(os.path.join("Queries", "GetDebtsByMonth.sql")).read()
 
     cur.execute(GetDebtValues.format("'" + Month + "'", "'" + Year + "'"))
     Debtsvalues = QueryToDict.SimpleQueryToDict(cur.fetchall())
 
-    cur.execute(GetCardDebtValues.format("'" + Month + "'", "'" + Year + "'"))
-    CardDebtsvalues = QueryToDict.CardQueryToDict(cur.fetchall())
-
-    return [Debtsvalues, CardDebtsvalues]
+    return Debtsvalues

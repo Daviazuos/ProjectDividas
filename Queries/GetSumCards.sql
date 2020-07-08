@@ -1,1 +1,1 @@
-select sum(valor) from cadcardvalues WHERE EXTRACT(MONTH FROM vencimento) = {} and EXTRACT(YEAR FROM vencimento) = {} or tipodedivida = 'fixa'
+select sum(valor) from cadcardvalues WHERE iscardcred = True and EXTRACT(MONTH FROM vencimento) = {} and EXTRACT(YEAR FROM vencimento) = {} or tipodedivida = 'fixa'

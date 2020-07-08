@@ -18,7 +18,9 @@ def AddDebtsValuesModels(args):
         'Vencimento': args['Vencimento'],
         'TipoDeDivida': args['TipoDeDivida'],
         'NumeroParcelas': args['QuantidadeParcelas'],
-        'Status': 'Active'
+        'Status': 'Active',
+        'descricao': "",
+        'iscardcred': False
     }
 
     # Manda pra validação!
@@ -60,7 +62,8 @@ def AddValuesCredCard(args):
             "Vencimento": args['VencimentoAjustado'],
             "Status": "Active",
             "TipoDeDivida": args["TipoDeDividaCartao"],
-            "Descricao": args['Descricao']
+            "descricao": args['Descricao'],
+            "iscardcred": True
     }
 
     return AddValue, UniqueIdValue

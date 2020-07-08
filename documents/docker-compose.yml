@@ -1,24 +1,21 @@
 version: '3'
 
 services:
-  postgres-compose:
-    image: postgres
+  postgres:
+    image: postgres:12
     environment:
-      POSTGRES_PASSWORD: "@soad123"
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: 123456
     ports:
-      - "15432:5432"
-    networks:
-      - postgres-compose-network
+      - "5432:5432"
       
   pgadmin-compose:
     image: dpage/pgadmin4
     environment:
-      PGADMIN_DEFAULT_EMAIL: "davib.souza@hotmail.com"
-      PGADMIN_DEFAULT_PASSWORD: "@soad123"
+      PGADMIN_DEFAULT_EMAIL: "admin"
+      PGADMIN_DEFAULT_PASSWORD: "admin"
     ports:
       - "16543:80"
-    depends_on:
-      - postgres-compose
     networks:
       - postgres-compose-network
 

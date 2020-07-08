@@ -1,3 +1,4 @@
+from Commons import Functions
 
 def QueryToDict(query):
     values = query[0]
@@ -72,3 +73,19 @@ def CardQueryToDict(query):
         }
         Array.append(DictQuery)
     return Array
+
+def SumValuesToDict(query):
+    Array = []
+    for values in query:
+        DictQuery = {
+            "sum": values[0],
+            "month": values[1]
+        }
+        Array.append(DictQuery)
+    return Array
+
+def SumQueryToDict(simple, card):
+    for month in card.keys():
+        if month in simple:
+            simple[month] += card[month]
+    return card

@@ -5,4 +5,6 @@ CREATE TABLE IF NOT EXISTS caddiv(
 	numeroparcelas INTEGER,
 	vencimento TIMESTAMP,
 	tipodedivida VARCHAR (50),
-	status VARCHAR (50));
+	status VARCHAR (50),
+	descricao VARCHAR (50),
+	iscardcred VARCHAR (50));
