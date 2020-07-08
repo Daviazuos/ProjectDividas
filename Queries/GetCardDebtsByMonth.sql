@@ -1,1 +1,1 @@
-SELECT * FROM cadcardvalues WHERE EXTRACT(MONTH FROM vencimento) = {} and EXTRACT(YEAR FROM vencimento) = {} or tipodedivida = 'fixa'
+SELECT * FROM caddiv WHERE iscardcred = 'true' EXTRACT(MONTH FROM vencimento) = {} and EXTRACT(YEAR FROM vencimento) = {} or tipodedivida = 'fixa'

@@ -2,9 +2,9 @@ select
 	extract(month from vencimento),
 	sum(valor)
 
-from cadcardvalues
+from caddiv
 
-where extract(month from vencimento) > '01' and extract(year from vencimento) = {}
+where iscardcred = 'true' and extract(month from vencimento) > '01' and extract(year from vencimento) = {}
 
 group by
 	extract(month from vencimento),
