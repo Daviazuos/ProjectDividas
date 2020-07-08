@@ -37,6 +37,30 @@ def SendDebtsValues(values):
         msg = False
     return msg
 
+def SendCardsValues(values):
+    msg = True
+    cur = connection.cursor
+    con = connection.conn
+    AddValues = open(os.path.join("Queries","AddValues.sql")).read()
+    try:
+        cur.execute(AddValues,
+                    (
+                      values['Id'],
+                      values['CardName'],
+                      values['NumeroParcelas'],
+                      values['Valor'],
+                      values['Vencimento'],
+                      values['Status'],
+                      values['TipoDeDivida'],
+                      values['descricao'],
+                      values['iscardcred']
+                    ))
+        con.commit()
+    except Exception as e:
+        msg = False
+    return msg
+
+
 def SendCredCard(values):
     msg = True
     cur = connection.cursor

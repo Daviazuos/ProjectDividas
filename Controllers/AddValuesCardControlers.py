@@ -17,7 +17,7 @@ class AddValuesCredCard(Resource):
 
         args = parser.parse_args()
         DebtsValues, uniqueId = Models.AddValuesCredCard(args)
-        AddValues = DbServices.SendDebtsValues(DebtsValues)
+        AddValues = DbServices.SendCardsValues(DebtsValues)
         if AddValues:
             return uniqueId,200
         else:
