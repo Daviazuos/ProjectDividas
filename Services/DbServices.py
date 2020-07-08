@@ -154,3 +154,16 @@ def GetValuesByCurrentMonth():
     Debtsvalues = QueryToDict.SimpleQueryToDict(cur.fetchall())
 
     return Debtsvalues
+
+def GetCardValuesByCurrentMonth():
+    CurrentDate = datetime.datetime.now()
+    Month = str(CurrentDate.month)
+    Year = str(CurrentDate.year)
+    cur = connection.cursor
+
+    GetDebtValues = open(os.path.join("Queries", "GetCardsByMonth.sql")).read()
+
+    cur.execute(GetDebtValues.format("'" + Month + "'", "'" + Year + "'"))
+    Debtsvalues = QueryToDict.CardQueryToDict(cur.fetchall())
+
+    return Debtsvalues

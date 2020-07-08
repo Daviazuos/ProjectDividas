@@ -11,4 +11,4 @@ class GetSimpleDebtsByCurrentMonth(Resource):
 
 class GetCardDebtsByCurrentMonth(Resource):
     def get(self):
-        return DbServices.GetValuesByCurrentMonth()
+        return DbServices.GetCardValuesByCurrentMonth()
