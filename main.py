@@ -13,8 +13,9 @@ DbServices.CreateTables()
 # post
 
 api.add_resource(AddSimpleControlers.AddSimpleDebts, '/AddSimple')
-api.add_resource(AddCredCardControlers.AddCredCard, '/AddCard')
 api.add_resource(AddValuesCardControlers.AddValuesCredCard, '/AddValuesCard')
+
+api.add_resource(AddCredCardControlers.AddCredCard, '/AddCard')
 
 # get
 
