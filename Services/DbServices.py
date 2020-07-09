@@ -113,7 +113,7 @@ def GetAllDebtsSum(Month, Year):
     SumDebtsValues = open(os.path.join("Queries","GetAllSum.sql")).read()
 
     cur.execute(SumDebtsValues.format("'"+Month+"'", "'"+Year+"'"))
-    DebtsValues = QueryToDict.SimpleSumQueryToDict(cur.fetchall())
+    DebtsValues = QueryToDict.SumAllQueryToDict(cur.fetchall())
 
     return [{"Sum": DebtsValues[0]['Sum']}]
 
