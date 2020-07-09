@@ -98,12 +98,14 @@ def CardQueryToDict(query):
 
 def SumValuesToDict(query):
     Array = []
+    DictQuery = {
+        "sum": [],
+        "month": []
+    }
     for values in query:
-        DictQuery = {
-            "sum": values[0],
-            "month": values[1]
-        }
-        Array.append(DictQuery)
+        DictQuery["sum"].append(values[1])
+        DictQuery["month"].append(Functions.MonthNameByNumber(values[0]))
+    Array.append(DictQuery)
     return Array
 
 def SumQueryToDict(simple, card):
