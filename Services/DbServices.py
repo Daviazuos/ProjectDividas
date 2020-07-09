@@ -137,9 +137,9 @@ def GetDebtsSum(Month, Year):
 
 def GetCardsSum(Month, Year):
     cur = connection.cursor
-    SumValues = open(os.path.join("Queries","GetSumCards.sql")).read()
+    SumValues = open(os.path.join("Queries","GetSumDebts.sql")).read()
     cur.execute(SumValues.format("'"+Month+"'", "'"+Year+"'"))
-    values = QueryToDict.SimpleSumQueryToDict(cur.fetchall())
+    values = QueryToDict.CardSumQueryToDict(cur.fetchall())
     return values
 
 def GetValuesByCurrentMonth():
