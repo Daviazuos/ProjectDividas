@@ -37,16 +37,17 @@ def CardsNamesQueryToDict(query):
 def SimpleQueryToDict(query):
     Array = []
     for values in query:
-        DictQuery = {
-            "Id": values[0],
-            "name": values[1],
-            "valor": values[2],
-            "numeroparcelas": values[3],
-            "vencimento": str(values[4]),
-            "TipoDeDivida": values[5],
-            "Status": values[6]
-        }
-        Array.append(DictQuery)
+        if values[8] == 'false':
+            DictQuery = {
+                "Id": values[0],
+                "name": values[1],
+                "valor": values[2],
+                "numeroparcelas": values[3],
+                "vencimento": str(values[4]),
+                "TipoDeDivida": values[5],
+                "Status": values[6]
+            }
+            Array.append(DictQuery)
     return Array
 
 def SimpleSumQueryToDict(query):
