@@ -1,0 +1,1 @@
+select cardid from "Cards" where cardname = {}

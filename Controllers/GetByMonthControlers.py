@@ -1,14 +1,10 @@
 from flask_restful import Resource
-from Services import DbServices
-
-class GetDebtsByMonth(Resource):
-    def get(self, Month,Year):
-        return DbServices.GetValuesByMonth(Month,Year)
+from Services import DbGetServices
 
 class GetSimpleDebtsByCurrentMonth(Resource):
     def get(self):
-        return DbServices.GetValuesByCurrentMonth()
+        return DbGetServices.GetValuesByCurrentMonth()
 
 class GetCardDebtsByCurrentMonth(Resource):
     def get(self):
-        return DbServices.GetCardValuesByCurrentMonth()
+        return DbGetServices.GetCardValuesByCurrentMonth()

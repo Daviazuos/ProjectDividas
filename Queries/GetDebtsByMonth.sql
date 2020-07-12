@@ -1,1 +1,1 @@
-SELECT * FROM caddiv WHERE EXTRACT(MONTH FROM vencimento) = {} and EXTRACT(YEAR FROM vencimento) = {} or tipodedivida = 'fixa'
+(SELECT * FROM "Debts" as d join "Parcel" as p on p.debtid = d.debtid WHERE EXTRACT(MONTH FROM p.duedate) = {} and EXTRACT(YEAR FROM p.duedate) = {}) UNION (SELECT * FROM "Debts" as d join "Parcel" as p on p.debtid = d.debtid WHERE parceltype = 'fixa')

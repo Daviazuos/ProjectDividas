@@ -1,6 +1,6 @@
 from flask_restful import Resource, reqparse
 from Models import Models
-from Services import DbServices
+from Services import DbPostServices
 
 parser = reqparse.RequestParser()
 
@@ -17,7 +17,7 @@ class AddSimpleDebts(Resource):
         args = parser.parse_args()
         DebtsValues, uniqueId, result = Models.AddDebtsValuesModels(args)
         if result:
-            AddValues = DbServices.SendDebtsValues(DebtsValues)
+            AddValues = DbPostServices.SendDebtsValues(DebtsValues)
         else:
             return DebtsValues, 400
         if AddValues:

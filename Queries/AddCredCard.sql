@@ -1,6 +1,5 @@
-INSERT INTO cadcard ("cardid",
-                  "cardname",
-                  "vencimento",
-                  "fechamento",
-                  "status")
-VALUES(%s, %s, %s, %s, %s)
+INSERT INTO "Cards" ("cardname",
+                      "duedate",
+                      "closure",
+                      "cardstatus")
+VALUES(%s, %s, %s, %s) RETURNING cardid

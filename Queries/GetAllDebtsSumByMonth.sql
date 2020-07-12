@@ -1,11 +1,24 @@
-select
-	extract(month from vencimento),
-	sum(valor)
+SELECT SUM(hr), month from
+((SELECT
+  	EXTRACT(MONTH FROM p.duedate) as month,
+ 	value as hr
+ FROM
+ 	"Cards" as d
+ 	join "ParcelCard" as p on p.cardid = d.cardid
+ WHERE
+ 	EXTRACT(YEAR FROM p.duedate) = {}
+ 	and parceltype <> 'fixa')
 
-from caddiv
+UNION ALL
 
-where extract(month from vencimento) > '01' and extract(year from vencimento) = {}
-
-group by
-	extract(month from vencimento),
-	extract(year from vencimento)
+(SELECT
+  	EXTRACT(MONTH FROM p.duedate) as month,
+ 	value as hr
+ FROM
+ 	"Debts" as d
+ 	join "Parcel" as p on p.debtid = d.debtid
+ WHERE
+ 	EXTRACT(YEAR FROM p.duedate) = {}
+ 	and parceltype <> 'fixa'
+ )) as a
+ group by month

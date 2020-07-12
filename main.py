@@ -1,39 +1,41 @@
 from flask import Flask
 from flask_restful import Api
 from Controllers import AddSimpleControlers, AddCredCardControlers, AddValuesCardControlers,GetByMonthControlers , GetCardsControlers
-from Services import DbServices
 from flask_cors import CORS
 
 app = Flask(__name__)
 api = Api(app)
 CORS(app)
 
-DbServices.CreateTables()
+#DbServices.CreateTables()
 
 # post
 
-api.add_resource(AddSimpleControlers.AddSimpleDebts, '/AddSimple')
-api.add_resource(AddValuesCardControlers.AddValuesCredCard, '/AddValuesCard')
-
+# Adicionando Cartao de Credito
 api.add_resource(AddCredCardControlers.AddCredCard, '/AddCard')
+
+# Adicionando Dividas ou valores ao Cartao de Credito
+api.add_resource(AddSimpleControlers.AddSimpleDebts, '/AddDebts')
+api.add_resource(AddValuesCardControlers.AddValuesCredCard, '/AddValuesCard')
 
 # get
 
+# Get all values (card and simple) by current month
 api.add_resource(GetByMonthControlers.GetSimpleDebtsByCurrentMonth, '/Simple')
 api.add_resource(GetByMonthControlers.GetCardDebtsByCurrentMonth, '/Card')
 
-api.add_resource(GetByMonthControlers.GetDebtsByMonth, '/GetValuesByMOnth/<Month>/<Year>')
-
+# Get values from cards
 api.add_resource(GetCardsControlers.GetCards, '/GetCards')
 api.add_resource(GetCardsControlers.GetCardsNames, '/GetCardsNames')
 
-api.add_resource(GetCardsControlers.GetAllSum, '/GetAllSum/<Year>')
-api.add_resource(GetCardsControlers.GetAllDebtsSum, '/GetAllDebtsSum/<Month>/<Year>')
+# Sums
+
 api.add_resource(GetCardsControlers.GetDebtsSum, '/GetDebtsSum/<Month>/<Year>')
 api.add_resource(GetCardsControlers.GetCardsSum, '/GetCardsSum/<Month>/<Year>')
 
-api.add_resource(GetCardsControlers.GetMonthDebtsSum, '/GetMonthDebtsSum/<Year>')
-api.add_resource(GetCardsControlers.GetMonthCardsSum, '/GetMonthCardsSum/<Year>')
+api.add_resource(GetCardsControlers.GetAllDebtsSum, '/GetAllDebtsSum/<Month>/<Year>')
+
+api.add_resource(GetCardsControlers.GetMonthSum, '/GetMonthSum/<Year>')
 
 if __name__ == '__main__':
     app.run(debug=True)
