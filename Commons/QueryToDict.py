@@ -77,7 +77,8 @@ def CardQueryToDict(query):
                 "vencimento": str(values[9]),
                 "TipoDeDivida": values[10],
                 "Status": values[11],
-                "Descricao": values[12]
+                "numeroparcelas": values[12],
+                "Descricao": values[13]
             }
             Array.append(DictQuery)
     return Array
