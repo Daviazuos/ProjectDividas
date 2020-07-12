@@ -1,6 +1,6 @@
 from flask import Flask
 from flask_restful import Api
-from Controllers import AddSimpleControlers, AddCredCardControlers, AddValuesCardControlers,GetByMonthControlers , GetCardsControlers
+from Controllers import AddSimpleControlers, AddCredCardControlers, AddValuesCardControlers,GetByMonthControlers , GetCardsControlers, HomePage
 from flask_cors import CORS
 
 app = Flask(__name__)
@@ -19,6 +19,8 @@ api.add_resource(AddSimpleControlers.AddSimpleDebts, '/AddDebts')
 api.add_resource(AddValuesCardControlers.AddValuesCredCard, '/AddValuesCard')
 
 # get
+
+api.add_resource(HomePage.HomePage, '/')
 
 # Get all values (card and simple) by current month
 api.add_resource(GetByMonthControlers.GetSimpleDebtsByCurrentMonth, '/Simple')
