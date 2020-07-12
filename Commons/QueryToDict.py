@@ -54,16 +54,14 @@ def SimpleSumQueryToDict(query):
     return Array
 
 def SumAllQueryToDict(debts, cards):
-    DictQuery = {
-        "Sum": str(debts[0][0] + cards[0][0])
-    }
-    return DictQuery
+    Array = []
+    Array.append({"Sum": str(debts[0][0] + cards[0][0])})
+    return Array
 
 def CardSumQueryToDict(query):
-    DictQuery = {
-        "Sum": str(query[0][0])
-    }
-    return DictQuery
+    Array = []
+    Array.append({"Sum": str(query[0][0])})
+    return Array
 
 def CardQueryToDict(query):
     Array = []
