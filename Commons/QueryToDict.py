@@ -55,7 +55,13 @@ def SimpleSumQueryToDict(query):
 
 def SumAllQueryToDict(debts, cards):
     Array = []
-    Array.append({"Sum": str(debts[0][0] + cards[0][0])})
+    cardValue = cards[0][0]
+    debtValue = debts[0][0]
+    if cardValue is None:
+        cardValue = 0.00
+    if debtValue is None:
+        debtValue = 0.00
+    Array.append({"Sum": str(float(cardValue) + float(debtValue))})
     return Array
 
 def CardSumQueryToDict(query):
