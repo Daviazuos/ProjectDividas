@@ -4,5 +4,6 @@ INSERT INTO "ParcelCard"("cardid",
                          "duedate",
                          "parceltype",
                          "parcelstatus",
-                         "quantidadeparcelas")
+                         "quantidadeparcelas",
+                         "description")
 VALUES(%s, %s, %s, %s, %s, %s, %s)
