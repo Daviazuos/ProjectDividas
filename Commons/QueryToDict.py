@@ -37,7 +37,6 @@ def SimpleQueryToDict(query):
     Array = []
     for values in query:
         DictQuery = {
-            "Id": values[0],
             "name": values[1],
             "numeroparcelas": values[2],
             "parcela": values[5],
@@ -70,7 +69,6 @@ def CardQueryToDict(query):
     Array = []
     for values in query:
             DictQuery = {
-                "Id": values[0],
                 "name": values[1],
                 "parcela": values[7],
                 "valor": str(values[8]),
