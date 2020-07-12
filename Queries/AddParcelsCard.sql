@@ -6,4 +6,4 @@ INSERT INTO "ParcelCard"("cardid",
                          "parcelstatus",
                          "quantidadeparcelas",
                          "description")
-VALUES(%s, %s, %s, %s, %s, %s, %s)
+VALUES(%s, %s, %s, %s, %s, %s, %s, %s)
