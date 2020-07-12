@@ -80,7 +80,7 @@ def SendCardsValues(values):
                         value['TipoDeDivida'],
                         value['Status'],
                         value['quantidadeparcelas'],
-                        values['descricao']
+                        value['descricao']
                     ))
     con.commit()
     return result
