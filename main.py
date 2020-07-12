@@ -7,8 +7,6 @@ app = Flask(__name__)
 api = Api(app)
 CORS(app)
 
-#DbServices.CreateTables()
-
 # post
 
 # Adicionando Cartao de Credito
