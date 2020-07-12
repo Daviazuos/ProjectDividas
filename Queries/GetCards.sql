@@ -1,1 +1,1 @@
-SELECT * FROM cadcard
+SELECT * FROM "Cards"

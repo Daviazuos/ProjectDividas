@@ -1,0 +1,1 @@
+INSERT INTO "Debts" ("debtname", "quantidadeparcelas") VALUES (%s, %s) RETURNING debtid

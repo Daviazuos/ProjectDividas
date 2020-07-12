@@ -8,7 +8,8 @@ def CredCardLogic(args, valuesdb):
         mesfechamento = mes.format(str(valuesdb['Fechamento']).zfill(2))
         if DiaMesCompra <= mesfechamento:
             dataAjustada = "{}-{}-{}".format(anoAtual,mesfechamento.split('-')[0],mesfechamento.split('-')[1])
-            args['VencimentoAjustado'] = datetime.datetime.strptime(dataAjustada, "%Y-%m-%d")
+            args['Vencimento'] = dataAjustada
+            args['CardId'] = valuesdb['UniqueId']
             return args
 
 def GetDataFechamento():

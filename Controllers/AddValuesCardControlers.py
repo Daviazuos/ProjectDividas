@@ -1,6 +1,6 @@
 from flask_restful import Resource, reqparse
 from Models import Models
-from Services import DbServices
+from Services import DbPostServices
 
 parser = reqparse.RequestParser()
 
@@ -17,7 +17,7 @@ class AddValuesCredCard(Resource):
 
         args = parser.parse_args()
         DebtsValues, uniqueId = Models.AddValuesCredCard(args)
-        AddValues = DbServices.SendCardsValues(DebtsValues)
+        AddValues = DbPostServices.SendCardsValues(DebtsValues)
         if AddValues:
             return uniqueId,200
         else:
@@ -31,5 +31,4 @@ class AddValuesCredCard(Resource):
             "TipoDeDivida": "Parcelada",
             "DataCompra": "2020-05-15",
             "descricao": "Livros",
-            "iscardcred": True
         }

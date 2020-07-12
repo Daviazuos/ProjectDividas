@@ -7,8 +7,7 @@ def QueryToDict(query):
         "CardName": values[1],
         "Vencimento": values[2],
         "Fechamento": values[3],
-        "Valor": values[4],
-        "Status": values[5]
+        "Status": values[4]
     }
     return DictQuery
 
@@ -29,7 +28,7 @@ def CardsNamesQueryToDict(query):
     Array = []
     for values in query:
         DictQuery = {
-            "Cardname": values[0]
+            "Cardname": values[1]
         }
         Array.append(DictQuery)
     return Array
@@ -37,74 +36,61 @@ def CardsNamesQueryToDict(query):
 def SimpleQueryToDict(query):
     Array = []
     for values in query:
-        if values[8] == 'false':
-            DictQuery = {
-                "Id": values[0],
-                "name": values[1],
-                "valor": values[2],
-                "numeroparcelas": values[3],
-                "vencimento": str(values[4]),
-                "TipoDeDivida": values[5],
-                "Status": values[6]
-            }
-            Array.append(DictQuery)
-    return Array
-
-def SimpleSumQueryToDict(query):
-    Array = []
-    for values in query:
-        if values[1] == 'false':
-            DictQuery = {
-                "Sum": values[0]
-            }
-            Array.append(DictQuery)
-    return Array
-
-def SumAllQueryToDict(query):
-    Array = []
-    for values in query:
         DictQuery = {
-            "Sum": values[0]
+            "Id": values[0],
+            "name": values[1],
+            "numeroparcelas": values[2],
+            "parcela": values[5],
+            "valor": str(values[6]),
+            "vencimento": str(values[7]),
+            "TipoDeDivida": values[8],
+            "Status": values[9]
         }
         Array.append(DictQuery)
     return Array
 
-def CardSumQueryToDict(query):
+def SimpleSumQueryToDict(query):
     Array = []
-    for values in query:
-        if values[1] == 'true':
-            DictQuery = {
-                "Sum": values[0]
-            }
-            Array.append(DictQuery)
+    Array.append({"Sum": str(query[0][0])})
     return Array
+
+def SumAllQueryToDict(debts, cards):
+    DictQuery = {
+        "Sum": str(debts[0][0] + cards[0][0])
+    }
+    return DictQuery
+
+def CardSumQueryToDict(query):
+    DictQuery = {
+        "Sum": str(query[0][0])
+    }
+    return DictQuery
 
 def CardQueryToDict(query):
     Array = []
     for values in query:
-        if values[8] == 'true':
             DictQuery = {
                 "Id": values[0],
                 "name": values[1],
-                "valor": values[2],
-                "numeroparcelas": values[3],
-                "vencimento": str(values[4]),
-                "TipoDeDivida": values[5],
-                "Status": values[6],
-                "Descricao": values[7]
+                "parcela": values[7],
+                "valor": str(values[8]),
+                "vencimento": str(values[9]),
+                "TipoDeDivida": values[10],
+                "Status": values[11],
+                "Descricao": values[12]
             }
             Array.append(DictQuery)
     return Array
 
-def SumValuesToDict(query):
+def SumValuesToDict(query, fixedvalues):
     Array = []
     DictQuery = {
         "sum": [],
         "month": []
     }
     for values in query:
-        DictQuery["sum"].append(values[1])
-        DictQuery["month"].append(Functions.MonthNameByNumber(values[0]))
+        DictQuery["sum"].append(str(values[0]+fixedvalues[0][0]))
+        DictQuery["month"].append(Functions.MonthNameByNumber(values[1]))
     Array.append(DictQuery)
     return Array
 

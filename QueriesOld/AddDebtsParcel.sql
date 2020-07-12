@@ -1,0 +1,1 @@
+INSERT INTO "DebtsParcel" ("debtid") VALUES (%s)

@@ -1,1 +1,0 @@
-select sum(valor) from caddiv WHERE EXTRACT(MONTH FROM vencimento) = {} and EXTRACT(YEAR FROM vencimento) = {} or tipodedivida = 'fixa'

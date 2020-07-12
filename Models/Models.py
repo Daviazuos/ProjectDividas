@@ -1,46 +1,53 @@
-import json
 import uuid
-from Services import DbServices, CredCardServices
+from Services import DbPostServices, CredCardServices, DbGetServices
 import Validators
+from Commons import Functions
+
 
 def AddDebtsValuesModels(args):
     UniqueId = str(uuid.uuid1())
-
-    # Aqui faremos um dict of dict (a chave será sempre o UniqueId)
-    # com os dados sendo validados um a um e colocando o status de ativo
+    AddSimpleValues = []
     if args['TipoDeDivida'] == "fixa" or args['TipoDeDivida'] == "simples":
         args['QuantidadeParcelas'] = 0
 
-    AddSimpleValues = {
-        'Id': UniqueId,
-        'Name': args['Name'],
-        'Valor': args['Valor'],
-        'Vencimento': args['Vencimento'],
-        'TipoDeDivida': args['TipoDeDivida'],
-        'NumeroParcelas': args['QuantidadeParcelas'],
-        'Status': 'Active',
-        'descricao': "",
-        'iscardcred': False
-    }
+        AddSimpleValues.append({
+            'Name': args['Name'],
+            'Valor': args['Valor'],
+            'Vencimento': args['Vencimento'],
+            'NumeroParcelas': args['QuantidadeParcelas'],
+            'TipoDeDivida': args['TipoDeDivida'],
+            'Status': '',
+            'QuantidadeParcelas': args['QuantidadeParcelas']
+        })
+
+    elif args['TipoDeDivida'] == "Parcelada":
+        listArgs = Functions.CreateParcels(args)
+
+        for args in listArgs:
+            AddSimpleValues.append({
+                'Name': args['Name'],
+                'Valor': args['Valor'],
+                'Vencimento': args['Vencimento'],
+                'NumeroParcelas': args['Parcel'],
+                'TipoDeDivida': args['TipoDeDivida'],
+                'Status': 'Active',
+                'QuantidadeParcelas': args['QuantidadeParcelas']
+            })
 
     # Manda pra validação!
 
-    AddSimpleValues, result = Validators.AddDebtsValid(AddSimpleValues)
-
+    #AddSimpleValues, result = Validators.AddDebtsValid(AddSimpleValues)
+    result = True
     return AddSimpleValues, UniqueId, result
 
 def AddCredCardModels(args):
     UniqueIdCred = str(uuid.uuid1())
 
-    # Aqui faremos um dict of dict (a chave será sempre o UniqueId)
-    # com os dados sendo validados um a um e colocando o status de ativo
-
     AddCredCard = {
-        'CardId': UniqueIdCred,
         'CardName': args['CardName'],
         'Vencimento': args['Vencimento'],
         'Fechamento': args['Fechamento'],
-        'Status': 'Active'
+        'Status': True
     }
 
     # Manda pra validação!
@@ -49,26 +56,46 @@ def AddCredCardModels(args):
 
 def AddValuesCredCard(args):
     UniqueIdValue = str(uuid.uuid1())
+    AddValue = []
+
     if args['TipoDeDividaCartao'] == "fixa" or args['TipoDeDividaCartao'] == "simples":
         args['QuantidadeDeParcelasCartao'] = 0
 
-    args = AddValuesCredCardModels(args)
+        args = AddValuesCredCardModels(args)
 
-    AddValue = {
-            "Id": UniqueIdValue,
+        AddValue.append({
+            "CardId": args['CardId'],
             "CardName": args['CardName'],
             "NumeroParcelas": args['QuantidadeDeParcelasCartao'],
             "Valor": args['Valor'],
-            "Vencimento": args['VencimentoAjustado'],
+            "Vencimento": args['Vencimento'],
             "Status": "Active",
             "TipoDeDivida": args["TipoDeDividaCartao"],
             "descricao": args['Descricao'],
-            "iscardcred": True
-    }
+            "quantidadeparcelas": args['QuantidadeDeParcelasCartao']
+        })
+
+    elif args['TipoDeDividaCartao'] == "Parcelada":
+        args = AddValuesCredCardModels(args)
+
+        listArgs = Functions.CreateParcelsCard(args)
+
+        for args in listArgs:
+            AddValue.append({
+                "CardId": args['CardId'],
+                "CardName": args['CardName'],
+                "NumeroParcelas": args['Parcel'],
+                "Valor": args['Valor'],
+                "Vencimento": args['Vencimento'],
+                "Status": "Active",
+                "TipoDeDivida": args["TipoDeDividaCartao"],
+                "descricao": args['Descricao'],
+                "quantidadeparcelas": args['QuantidadeDeParcelasCartao']
+            })
 
     return AddValue, UniqueIdValue
 
 def AddValuesCredCardModels(args):
-    ValuesCardDb = DbServices.GetValuesByCardName(args['CardName'])
+    ValuesCardDb = DbGetServices.GetValuesByCardName(args['CardName'])
     AdjustFechamento = CredCardServices.CredCardLogic(args, ValuesCardDb)
     return AdjustFechamento

@@ -1,34 +1,30 @@
 from flask_restful import Resource
-from Services import DbServices
+from Services import DbGetServices
 
 class GetCards(Resource):
     def get(self):
-        return DbServices.GetCards()
+        return DbGetServices.GetCards()
 
 class GetCardsNames(Resource):
     def get(self):
-        return DbServices.GetCardsNames()
+        return DbGetServices.GetCardsNames()
 
 class GetDebtsSum(Resource):
     def get(self, Month,Year):
-        return DbServices.GetDebtsSum(Month, Year)
+        return DbGetServices.GetDebtsSum(Month, Year)
 
 class GetCardsSum(Resource):
     def get(self, Month,Year):
-        return DbServices.GetCardsSum(Month, Year)
+        return DbGetServices.GetCardsSum(Month, Year)
 
 class GetAllDebtsSum(Resource):
     def get(self, Month,Year):
-        return DbServices.GetAllDebtsSum(Month, Year)
+        return DbGetServices.GetAllDebtsSum(Month, Year)
 
-class GetAllSum(Resource):
+class GetMonthSum(Resource):
     def get(self, Year):
-        return DbServices.GetAllDebtsByMonth(Year)
-
-class GetMonthDebtsSum(Resource):
-    def get(self, Year):
-        return DbServices.GetAllDebtsByMonth(Year)
+        return DbGetServices.GetAllDebtsByMonth(Year)
 
 class GetMonthCardsSum(Resource):
     def get(self, Year):
-        return DbServices.GetAllDebtsByMonth(Year)[1]
+        return DbGetServices.GetAllDebtsByMonth(Year)[1]
