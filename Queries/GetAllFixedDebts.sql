@@ -1,8 +1,19 @@
-SELECT
+SELECT SUM(hr) from
+((SELECT
  	value as hr
-FROM
+ FROM
+ 	"Cards" as d
+ 	join "ParcelCard" as p on p.cardid = d.cardid
+ WHERE
+ 	parceltype = 'fixa')
+
+UNION ALL
+
+(SELECT
+ 	value as hr
+ FROM
  	"Debts" as d
  	join "Parcel" as p on p.debtid = d.debtid
-
-WHERE
+ WHERE
  	parceltype = 'fixa'
+ )) as a
