@@ -2,7 +2,7 @@ import datetime
 
 def CredCardLogic(args, valuesdb):
     DiaMesCompra = args['DataCompra'][-5:]
-    anoAtual = datetime.datetime.now().year
+    anoAtual = args['DataCompra'][:4]
     mesesFechamento = GetDataFechamento()
     for mes in mesesFechamento:
         mesfechamento = mes.format(str(valuesdb['Fechamento']).zfill(2))
