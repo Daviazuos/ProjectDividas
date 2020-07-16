@@ -8,7 +8,7 @@ class AddValuesCredCard(Resource):
     def post(self):
         parser.add_argument('CardName', type=str)
         parser.add_argument('Valor', type=float)
-        parser.add_argument('QuantidadeDeParcelasCartao', type=int)
+        parser.add_argument('QuantidadeDeParcelasCartao', type=str)
         parser.add_argument('TipoDeDividaCartao', type=str)
         parser.add_argument('DataCompra', type=str)
         parser.add_argument('Descricao', type=str)

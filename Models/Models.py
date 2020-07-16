@@ -66,13 +66,13 @@ def AddValuesCredCard(args):
         AddValue.append({
             "CardId": args['CardId'],
             "CardName": args['CardName'],
-            "NumeroParcelas": args['QuantidadeDeParcelasCartao'],
+            "NumeroParcelas": int(args['QuantidadeDeParcelasCartao']),
             "Valor": args['Valor'],
             "Vencimento": args['Vencimento'],
             "Status": "Active",
             "TipoDeDivida": args["TipoDeDividaCartao"],
             "descricao": args['Descricao'],
-            "quantidadeparcelas": args['QuantidadeDeParcelasCartao']
+            "quantidadeparcelas": int(args['QuantidadeDeParcelasCartao'])
         })
 
     elif args['TipoDeDividaCartao'] == "Parcelada":
