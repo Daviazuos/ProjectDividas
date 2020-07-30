@@ -3,6 +3,19 @@ from Services import DbPostServices, CredCardServices, DbGetServices
 import Validators
 from Commons import Functions
 
+def AddReceivedModels(args):
+    UniqueId = str(uuid.uuid1())
+
+    AddReceived = {
+        'Date': args['Date'],
+        'Valor': args['Valor'],
+        'Tipo': args['Tipo'],
+        'Status': True
+    }
+
+    # Manda pra validação!
+
+    return AddReceived, UniqueId
 
 def AddDebtsValuesModels(args):
     UniqueId = str(uuid.uuid1())

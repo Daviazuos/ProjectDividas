@@ -62,6 +62,24 @@ def SendCredCard(values):
         msg = False
     return msg
 
+def SendReceived(values):
+    msg = True
+    cur = connection.cursor
+    con = connection.conn
+    AddValues = open(os.path.join("Queries","AddReceived.sql")).read()
+    try:
+        cur.execute(AddValues,
+                    (
+                      values['Date'],
+                      values['Valor'],
+                      values['Tipo']
+                    ))
+        con.commit()
+    except Exception as e:
+        print(e)
+        msg = False
+    return msg
+
 def SendCardsValues(values):
     result = True
 
