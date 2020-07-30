@@ -6,7 +6,8 @@ FROM
 
 WHERE
 	EXTRACT(MONTH FROM p.duedate) = {}
-	and EXTRACT(YEAR FROM p.duedate) = {})
+	and EXTRACT(YEAR FROM p.duedate) = {}
+	and d.cardname = {})
 UNION
 (SELECT
 	*
@@ -15,6 +16,7 @@ FROM
 	"ParcelCard" as p on p.cardid = d.cardid
 
 WHERE
-	parceltype = 'fixa')
+	parceltype = 'fixa'
+	and d.cardname = {})
 
 

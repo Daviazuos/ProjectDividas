@@ -22,7 +22,7 @@ api.add_resource(HomePage.HomePage, '/')
 
 # Get all values (card and simple) by current month
 api.add_resource(GetByMonthControlers.GetSimpleDebtsByCurrentMonth, '/Simple')
-api.add_resource(GetByMonthControlers.GetCardDebtsByCurrentMonth, '/Card')
+api.add_resource(GetByMonthControlers.GetCardDebtsByCurrentMonth, '/Card/<CardName>')
 
 # Get values from cards
 api.add_resource(GetCardsControlers.GetCards, '/GetCards')
@@ -32,6 +32,8 @@ api.add_resource(GetCardsControlers.GetCardsNames, '/GetCardsNames')
 
 api.add_resource(GetCardsControlers.GetDebtsSum, '/GetDebtsSum/<Month>/<Year>')
 api.add_resource(GetCardsControlers.GetCardsSum, '/GetCardsSum/<Month>/<Year>')
+
+api.add_resource(GetCardsControlers.GetSumByCardName, '/GetSumByCardName/<Month>/<Year>')
 
 api.add_resource(GetCardsControlers.GetAllDebtsSum, '/GetAllDebtsSum/<Month>/<Year>')
 
