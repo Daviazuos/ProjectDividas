@@ -3,4 +3,4 @@ from Services import DbGetServices
 
 class GetReceived(Resource):
     def get(self):
-        return DbGetServices.GetCardValuesByCurrentMonth()
+        return DbGetServices.GetReceived()

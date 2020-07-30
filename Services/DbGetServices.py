@@ -77,6 +77,13 @@ def GetCardsSum(Month, Year):
     values = QueryToDict.CardSumQueryToDict(cur.fetchall())
     return values
 
+def GetReceived():
+    cur = connection.cursor
+    GetValues = open(os.path.join("Queries", "GetReceived.sql")).read()
+    cur.execute(GetValues)
+    CardNames = QueryToDict.ReceivedQueryToDict(cur.fetchall())
+    return CardNames
+
 def GetCardSumByName(Month, Year):
     cur = connection.cursor
     SumValues = open(os.path.join("Queries", "GetSumByCardName.sql")).read()

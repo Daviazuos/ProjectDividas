@@ -24,6 +24,17 @@ def CardsQueryToDict(query):
         Array.append(DictQuery)
     return Array
 
+def ReceivedQueryToDict(query):
+    Array = []
+    for values in query:
+        DictQuery = {
+            "Date": values[0],
+            "Value": values[1],
+            "Type": values[2]
+        }
+        Array.append(DictQuery)
+    return Array
+
 def CardsNamesQueryToDict(query):
     Array = []
     for values in query:
