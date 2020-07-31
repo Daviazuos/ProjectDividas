@@ -24,6 +24,11 @@ def CardsQueryToDict(query):
         Array.append(DictQuery)
     return Array
 
+def ReceivedSumQueryToDict(query):
+    Array = []
+    Array.append({"Sum": str(query[0][0])})
+    return Array
+
 def ReceivedQueryToDict(query):
     Array = []
     for values in query:
