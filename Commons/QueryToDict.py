@@ -28,9 +28,9 @@ def ReceivedQueryToDict(query):
     Array = []
     for values in query:
         DictQuery = {
-            "Date": values[0],
-            "Value": values[1],
-            "Type": values[2]
+            "Date": str(values[1]),
+            "Value": str(values[2]),
+            "Type": values[3]
         }
         Array.append(DictQuery)
     return Array
