@@ -18,5 +18,3 @@ FROM
 WHERE
 	parceltype = 'fixa'
 	and d.cardname = {})
-
-

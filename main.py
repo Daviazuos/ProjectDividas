@@ -27,6 +27,9 @@ api.add_resource(HomePage.HomePage, '/')
 api.add_resource(GetByMonthControlers.GetSimpleDebtsByCurrentMonth, '/Simple')
 api.add_resource(GetByMonthControlers.GetCardDebtsByCurrentMonth, '/Card/<CardName>')
 
+# Get all values (card and simple)
+api.add_resource(GetByMonthControlers.GetAllValues, '/GetAllValues/<Month>/<Year>')
+
 # Get Recebidos
 api.add_resource(GetReceivedControllers.GetReceived, '/GetReceived')
 api.add_resource(GetReceivedControllers.GetSumReceived, '/GetSumReceived')

@@ -1,3 +1,4 @@
+from datetime import datetime
 from Commons import Functions
 
 def QueryToDict(query):
@@ -23,6 +24,27 @@ def CardsQueryToDict(query):
         }
         Array.append(DictQuery)
     return Array
+
+def AdjustDate(intDate):
+    if type(intDate) == int:
+        dateNow = datetime.now()
+        return dateNow.replace(day=intDate).strftime("%d/%m/%Y")
+    else:
+        return intDate.strftime("%d/%m/%Y")
+
+def GetAllValues(debtsQuery, cardsQuery):
+    Array = []
+    allValues = [x for x in debtsQuery + cardsQuery]
+
+    for values in allValues:
+        DictQuery = {
+            "Name": values[0],
+            "Valor": str(values[1]),
+            "Vencimento": AdjustDate(values[2])
+        }
+        Array.append(DictQuery)
+    return Array
+
 
 def ReceivedSumQueryToDict(query):
     Array = []
